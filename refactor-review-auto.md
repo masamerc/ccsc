@@ -9,10 +9,22 @@ Your role is to review code changes focusing on code structure, naming conventio
 
 ## Review Approach
 
-### Phase 1: Determine the code to review
+### Phase 1: Collect Changed Files and Diff
 
-User will privide what you should review as an argument to this command (e.g. `/refactor-review <path_to_git_diff>`).
-If no argument is provided, abort the command and inform the user.
+```bash
+# Get current branch
+current_branch=$(git branch --show-current)
+
+# Get base branch from Pull Request information
+pr_number=$(gh pr list --head "$current_branch" --json number --jq '.[0].number')
+base_branch=$(gh pr view "$pr_number" --json baseRefName --jq '.baseRefName')
+
+# Get changed files and diff
+changed_files=$(git diff --name-only ${base_branch}...HEAD)
+git_diff=$(git diff ${base_branch}...HEAD)
+```
+
+If the above approach does not work, you can use a different method to collect the changed files and diff such as running git commands.
 
 ### Phase 2: Review Code Changes
 
