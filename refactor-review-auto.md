@@ -1,6 +1,6 @@
 ---
 name: refactoring-review-auto
-description: Reviews code for refactoring opportunities, coding standards, and structural improvements without changing behavior
+description: Reviews code for refactoring opportunities, coding standards, and structural improvements without changing behavior. Agent will automatically find diffs and files to review based on Github PRs and git commits.
 color: yellow
 ---
 
